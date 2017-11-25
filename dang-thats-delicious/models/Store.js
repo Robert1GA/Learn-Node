@@ -17,9 +17,10 @@ const storeSchema = new mongoose.Schema({
 });
 
 storeSchema.pre('save', function(next) {
-  if(!thisisModified('name')) {
+  if(!this.isModified('name')) {
     next(); // skip it
-    return; //stop this functino from running
+    return; //stop this function from running
+    // return next(); // this also works the same as the 2 lines above
   }
   this.slug = slug(this.name);
   next();
